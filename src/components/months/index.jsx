@@ -1,23 +1,26 @@
-import { useState } from "react"
+import { useContext } from "react"
+import { AppContext } from "../../context/AppContext"
 
 const masehi = [ "january", "february", "march", "april", "may", "june", "July" , "august", "september", "october", "november", "december" ]
 
 export default function Months() {
-  const thisMonth = new Date().getMonth()
-  const initMonth = masehi.filter( (month, i) => {
-    return i === thisMonth
+  const { date, setDate } = useContext(AppContext)
+
+  const selectedMonth = masehi.filter( (month, i) => {
+    return i === date.month
   })
 
-  const [selectedMonth, setSelectedMonth] = useState(initMonth[0])
-  console.log(selectedMonth)
-
   const handleSelect = (e) => {
-    setSelectedMonth(e.target.value)
+    setDate({
+      ...date,
+      month: e.target.selectedIndex,
+      monthName : e.target.value.toLowerCase().replace(/\w/, firstLetter => firstLetter.toUpperCase())
+    })
   }
 
   return (
     <div>
-      <select value={selectedMonth} onChange={ handleSelect } >
+      <select value={selectedMonth[0]} onChange={ handleSelect } >
         { masehi.length && masehi.map( (month, key) => <option key={key} value={month}>{month.toUpperCase()}</option> ) }
       </select>
     </div>
