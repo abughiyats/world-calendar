@@ -32,8 +32,6 @@ export default function Days() {
     })()
   }, [])
 
-  console.log(country);
-
   useEffect(() => {
     (async (url, national, year, apiKey) => {
       if (national.isLoading === false) {
@@ -52,7 +50,6 @@ export default function Days() {
       }
     })(holidaysURL, country, date.year, apiKey)
   }, [date, country.result.countryCode])
-  console.log(publicHoliday);
   
   const generateDate = (date) => {
     const currentMonth = new Date(date.year, date.month, 0)
@@ -81,7 +78,7 @@ export default function Days() {
       if(j % 7 === 0){
         multiple7 = j
       }
-      row.push(<div className={ `${(holiday.length > 0 &&  j ===  parseInt(holiday[0].date.substr(8, 10))) || j === weeks || j === weeks + multiple7 ? "bg-red-400" : "border-gray-400"} border-2 hover:bg-blue-100 p-4 m-2 rounded-md` }>{j}</div>)
+      row.push(<div className={ `${(holiday.length > 0 &&  j ===  parseInt(holiday[0].date.substr(8, 10))) || j === weeks || j === weeks + multiple7 ? "bg-red-400 text-white" : "border-gray-400"} border-2 hover:bg-blue-100 md:p-3 m-1 rounded-md` }>{j}</div>)
     }
     return row
   }
@@ -89,11 +86,12 @@ export default function Days() {
 
   return (
     <div>
-      <div className="grid grid-cols-7 text-center p-4">
+      <div className="grid grid-cols-7 text-center px-4 pb-4">
         { generateDate(date) }
       </div>
-      <div className="px-8">
-        { monthlyHoliday.length > 0 && monthlyHoliday.map((day, i) => ( <h1 key={i}>{`${day.date.substr(8, 10)} ${day.name}`} </h1> )) }
+      { monthlyHoliday.length > 0 ? (<h1 className="px-6 mb-4 md:text-xl sm:text-base">Holidays</h1>) : "" }
+      <div className="px-6 grid md:grid-cols-2 sm:grid-cols-1 gap-4">
+        { monthlyHoliday.length > 0 && monthlyHoliday.map((day, i) => ( <h1 key={i} className="mb-2 md:text-base sm: text-sm text-red-600"> <span className="bg-red-400 p-2 pl-3 pb-3 my-2 mr-2 rounded-md text-white">{day.date.substr(8, 10)} </span>{day.name} </h1> )) }
       </div>
     </div>
   )

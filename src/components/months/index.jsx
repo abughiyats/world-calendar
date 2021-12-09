@@ -19,10 +19,10 @@ export default function Months() {
   }
 
   return (
-    <div>
-      <select value={selectedMonth[0]} onChange={ handleSelect } >
+    <label>
+      <select value={selectedMonth[0]} onChange={ handleSelect } className="form-select block w-full mt-1" >
         { masehi.length && masehi.map( (month, key) => <option key={key} value={month}>{month.toUpperCase()}</option> ) }
       </select>
-    </div>
+    </label>
   )
 }
