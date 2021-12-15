@@ -46,8 +46,6 @@ export default function Days() {
       }
     })(holidaysURL, country, date.year, apiKey)
   }, [date, country.result.country_code])
-
-  console.log(country.result.country_code);
   
   const generateDate = (date) => {
     const currentMonth = new Date(date.year, date.month, 0)
