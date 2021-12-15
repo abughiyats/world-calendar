@@ -56,7 +56,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 Angga Prabowo
 
 **APIs**
-[Api Ninjas](https://api-ninjas.com)
-[ip-api](https://ip-api.com)
+> [Api Ninjas](https://api-ninjas.com)
+> [ip-api](https://ip-api.com)
 
 **Enjoy the codes**

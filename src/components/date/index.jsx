@@ -15,18 +15,14 @@ export default function Days() {
 
   useEffect(() => {
     (function() {
-      const apiGeonames = `http://ip-api.com/json/`
-
-      fetch(apiGeonames, {
-        method: 'GET',
-      })
+      const apiGeonames = `https://ipapi.co/json/`
+      fetch(apiGeonames)
       .then(res => res.json())
       .then(res => {
-        const data = res
         setCountry({
           ...country,
           isLoading : false,
-          result : data
+          result : res
         })
       })
     })()
@@ -35,7 +31,7 @@ export default function Days() {
   useEffect(() => {
     (async (url, national, year, apiKey) => {
       if (national.isLoading === false) {
-        const countryCode = national.result.countryCode
+        const countryCode = national.result.country_code
         try {
           const response = await fetch(`${url}country=${countryCode}&year=${year}&type=public_holiday`, {
             headers: {
@@ -49,7 +45,9 @@ export default function Days() {
         }
       }
     })(holidaysURL, country, date.year, apiKey)
-  }, [date, country.result.countryCode])
+  }, [date, country.result.country_code])
+
+  console.log(country.result.country_code);
   
   const generateDate = (date) => {
     const currentMonth = new Date(date.year, date.month, 0)
